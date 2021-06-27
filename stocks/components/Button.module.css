@@ -1,0 +1,22 @@
+.button{
+    text-align: center;
+    color: #fff;
+    background: transparent;
+    border: 1px solid #5a735a;
+    cursor: pointer;
+    display: inline-block;
+    padding: .375rem .75rem;
+    margin: .25rem .125rem;
+    user-select: none;
+    vertical-align: middle;
+    height: fit-content;
+}
+
+.button:hover{
+    border-color: #81a581;
+}
+
+.button:focus{
+    border-color: #4e644e;
+}
+

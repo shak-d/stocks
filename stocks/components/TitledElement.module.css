@@ -1,0 +1,18 @@
+
+.titledElement{
+    padding: 1rem;
+    display: inline-block;
+    background-color: #000;
+    border-radius: 3px;
+}
+
+.titledElement small{
+    color: #99a39c;
+    font-weight: bold;
+    font-size: small;
+}
+
+.titledElement > div{
+    color: #FFF;
+    margin: .5rem 0 0 1rem;
+}
