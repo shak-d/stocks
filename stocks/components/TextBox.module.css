@@ -1,0 +1,31 @@
+.container{
+    border: 1px solid #5a735a;
+    width: 100%;
+    margin: 0.25rem 0;
+}
+
+.textBox:hover {
+    border-color: #81a581;
+}
+
+.textBox {
+    background: #000;
+    border: none;
+    margin: 0.3rem 0.25rem;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    width: calc(100% - 0.75rem);
+    display: block;
+}
+
+.textBox:focus {
+    border-color: #4e644e;
+    background: #5d6b5e;
+    border: none;
+}
+
+.textBox:focus-visible {
+    outline: none;
+}

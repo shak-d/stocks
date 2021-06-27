@@ -1,8 +1,8 @@
 
 .header{
-    border-bottom: 2px solid #647466;
     display: flex;
     align-items: center;
     padding: 0.5rem;
-    background-color: #647466;
+    background: #647466;
+    background: linear-gradient(340deg, #647466 0%, #000 80%);
 }

@@ -1,0 +1,50 @@
+.window {
+    display: inline-block;
+    border: 4px solid #5d6b5e;
+    border-radius: 3px;
+    position: absolute;
+    box-shadow: 0 0 4px 1px #000;
+    z-index: 1;
+}
+
+.window:hover,.window:active,.window:target {
+    z-index: 2;
+}
+
+.header {
+    background: #5d6b5e;
+    padding: 0 2px;
+    height:16px;
+}
+
+.headerTitle {
+    color: #fff;
+    font-size: 0.8em;
+    vertical-align: top;
+    user-select: none;
+}
+
+.headerClose{
+    padding: 0;
+    background: transparent;
+    border: none;
+    float: right;
+    color: #fff;
+    cursor: pointer;
+}
+
+.contentContainer{
+    height: calc(100% - 16px);
+    width: 100%;
+    background: #000;
+}
+
+.tickerContainer{
+    display:flex;
+}
+
+.tickerTextBoxContainer{
+    flex-grow: 1;
+    padding: 0 0.25rem;
+}
+
