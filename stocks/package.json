@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "lightweight-charts": "^3.3.0",
+    "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "next": "11.0.1",
     "react": "^17.0.2",

@@ -1,0 +1,21 @@
+.contentContainer{
+    height: calc(100% - 16px);
+    width: 100%;
+    background: #000;
+}
+
+.tickerContainer{
+    display:flex;
+}
+
+.tickerTextBoxContainer{
+    flex-grow: 1;
+    padding: 0 0.25rem;
+}
+
+.hotButtonsContainer{
+    height: 30px;
+    width:90%;
+    margin: auto;
+    display: flex;
+}

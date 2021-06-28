@@ -4,6 +4,7 @@ import styles from './Button.module.css';
 type ButtonProps = {
     title: string;
     onClick?: (event : MouseEvent) => void;
+    type?: "buy" | "sell" | undefined;
 }
 
 export default class Button extends Component<ButtonProps>{
@@ -15,7 +16,8 @@ export default class Button extends Component<ButtonProps>{
 
     render() {
         return(
-            <button type="button" className={styles.button} onClick={this.handleClick}>
+
+            <button type="button" className={`${styles.button} ${this.props.type!==undefined?styles[this.props.type]:""}`} onClick={this.handleClick}>
                 {this.props.title}
             </button>
         )

@@ -4,14 +4,27 @@ import styles from '../styles/Home.module.css'
 import stylesUtils from '../styles/utilities.module.css'
 import Header from '../components/Header';
 import Window from '../components/Window';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import Montage from '../components/Montage';
 
 interface IProps {
 }
 
 interface IState {
-  windows: number[];
+  windows: WindowElement[];
 }
+
+interface WindowElement {
+  ticker?: string;
+  type: WindowElementType;
+}
+
+enum WindowElementType {
+  Montage,
+  Tape,
+  Positions
+}
+
 
 export default class Home extends Component<IProps, IState> {
 
@@ -22,16 +35,58 @@ export default class Home extends Component<IProps, IState> {
       windows: []
     }
     this.onNewChart = this.onNewChart.bind(this);
+    this.onNewTape = this.onNewTape.bind(this);
   }
 
-  onNewChart(){
-    var newState: number[];
+  private onNewChart() {
+    var newState: WindowElement[];
     newState = this.state.windows.slice();
-    newState.push(0);
-    this.setState({windows : newState});
+    newState.push({
+      ticker: "",
+      type: WindowElementType.Montage
+    });
+    this.setState({ windows: newState });
+  }
+
+  private onNewTape(){
+    var newState: WindowElement[];
+    newState = this.state.windows.slice();
+    newState.push({
+      ticker: "",
+      type: WindowElementType.Tape
+    });
+    this.setState({ windows: newState });
+  }
+
+  private createMontageWindowEement(): JSX.Element {
+    return (
+      <Window>
+        <Montage defaultWindowSize={500} />
+      </Window>
+    )
+  }
+
+  private createTapeWindowElemet() : JSX.Element {
+    return (
+      <Window>
+        <span>TODO</span>
+      </Window>
+    )
   }
 
   render() {
+
+    let windows : JSX.Element[] = [];
+
+    this.state.windows.map((item) => {
+      if(item.type == WindowElementType.Montage){
+        windows.push(this.createMontageWindowEement());
+      }
+      else if(item.type == WindowElementType.Tape){
+        windows.push(this.createTapeWindowElemet());
+      }
+    });
+
     return (
       <div className={stylesUtils.h100}>
         <Head>
@@ -42,14 +97,10 @@ export default class Home extends Component<IProps, IState> {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
         </Head>
-        <Header onNewChartClicked={this.onNewChart} onNewTapeClicked={this.onNewChart}/>
+        <Header onNewChartClicked={this.onNewChart} onNewTapeClicked={this.onNewTape} />
 
         <div className={styles.windowsContainer}>
-          {
-            this.state.windows.map((item) => (
-              <Window />
-            ))
-          }
+          {windows}
         </div>
 
       </div>

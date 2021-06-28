@@ -2,7 +2,7 @@ import styles from './TitledElement.module.css';
 
 type TitledElementProps = {
     title: string;
-    children: JSX.Element | JSX.Element[] | string;
+    children: JSX.Element | string;
     className?: string;
 }
 
