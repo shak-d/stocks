@@ -11,12 +11,14 @@ type IProps = {
 };
 
 type IState = {
-    prices: PricePoint[]
+    positions: Position[]
 }
 
-type PricePoint = {
-    time: Date;
+type Position = {
     price: number;
+    ticker: string;
+    size: number;
+    pnl: number;
 }
 
 export default class Tape extends Component<IProps, IState>{
@@ -24,7 +26,7 @@ export default class Tape extends Component<IProps, IState>{
     constructor(props: IProps) {
         super(props);
         this.state = {
-            prices: []
+            positions: []
         }
         this.addPricePoint = this.addPricePoint.bind(this);
     }
@@ -34,11 +36,11 @@ export default class Tape extends Component<IProps, IState>{
         this.addPricePoint({ time: new Date(), price: 656 });
     }
 
-    addPricePoint(pricePoint: PricePoint): void {
+    addPricePoint(position: Position): void {
         this.setState((state:IState)=>{
-            var newPrices: PricePoint[];
+            var newPrices: Position[];
             newPrices = state.prices.slice().reverse();
-            newPrices.push(pricePoint);
+            newPrices.push(position);
             if (newPrices.length > Tape.maxRows)
                 newPrices.shift();
             newPrices.reverse();
@@ -46,11 +48,13 @@ export default class Tape extends Component<IProps, IState>{
         });
     }
 
-    private createRow(pricePoint: PricePoint, index: number): JSX.Element {
+    private createRow(position: Position): JSX.Element {
         return (
             <tr key={nextId()}>
-                <td>{moment(pricePoint.time).format("HH:mm:ss")}</td>
-                <td>{pricePoint.price}</td>
+                <td>{position.ticker}</td>
+                <td>{position.size}</td>
+                <td>{position.price}</td>
+                <td>{position.pnl}</td>
             </tr>
         );
     }
@@ -58,34 +62,28 @@ export default class Tape extends Component<IProps, IState>{
 
     render(): JSX.Element {
 
-        let tapeRows: JSX.Element[] = [];
-        this.state.prices.forEach((item: PricePoint, index: number) => {
+        let positionsRows: JSX.Element[] = [];
+        this.state.positions.forEach((item: Position) => {
            
-            tapeRows.push(this.createRow(item, index));
+            positionsRows.push(this.createRow(item));
         }
         
         );
 
         return (
-            <div>
-                <div className={montageStyles.tickerContainer}>
-                    <div className={montageStyles.tickerTextBoxContainer}>
-                        <TextBox />
-                    </div>
-                    <Button title="Go" />
-                </div>
                 <table className={tableStyles.table}>
                     <thead>
                         <tr>
-                            <th>Time</th>
+                            <th>Ticker</th>
+                            <th>Size</th>
                             <th>Price</th>
+                            <th>PnL</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {tapeRows}
+                        {positionsRows}
                     </tbody>
                 </table>
-            </div>
         )
 
     }

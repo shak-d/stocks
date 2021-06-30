@@ -24,9 +24,9 @@ export default class Window extends Component<IProps, IState>{
     defaultWindowSize: number = 500;
 
     onResize(e: SyntheticEvent, data: ResizeCallbackData) {
-        if(this.props.children instanceof Montage){
-          var  montage = this.props.children as Montage;
-          montage.resizeChart(data.size.width, data.size.height);
+        if (this.props.children instanceof Montage) {
+            var montage = this.props.children as Montage;
+            montage.resizeChart(data.size.width, data.size.height);
         }
     };
 
@@ -47,11 +47,13 @@ export default class Window extends Component<IProps, IState>{
                 scale={1}>
                 <ResizableBox width={this.defaultWindowSize} height={this.defaultWindowSize}
                     minConstraints={[200, 100]} className={styles.window} onResize={this.onResize}>
-                    <div className={styles.header}>
-                        <span className={styles.headerTitle}>GME chart</span>
-                        <button className={styles.headerClose}>x</button>
+                    <div className={styles.windowContentContainer}>
+                        <div className={styles.header}>
+                            <span className={styles.headerTitle}>GME chart</span>
+                            <button className={styles.headerClose}>x</button>
+                        </div>
+                        {this.props.children}
                     </div>
-                    {this.props.children}
                 </ResizableBox>
             </Draggable>
         );

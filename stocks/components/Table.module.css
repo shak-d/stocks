@@ -1,0 +1,14 @@
+.table {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.table thead {
+    background: #5d6b5e;
+}
+
+.table th {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}

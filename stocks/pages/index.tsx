@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import Window from '../components/Window';
 import React, { Component } from 'react';
 import Montage from '../components/Montage';
+import Tape from '../components/Tape';
+import nextId from 'react-id-generator';
 
 interface IProps {
 }
@@ -67,9 +69,10 @@ export default class Home extends Component<IProps, IState> {
   }
 
   private createTapeWindowElemet() : JSX.Element {
+
     return (
-      <Window>
-        <span>TODO</span>
+      <Window key={nextId()}>
+        <Tape />
       </Window>
     )
   }

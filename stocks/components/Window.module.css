@@ -7,6 +7,11 @@
     z-index: 1;
 }
 
+.windowContentContainer{
+    background: #000;
+    height: 100%;
+}
+
 .window:hover,.window:active,.window:target {
     z-index: 2;
 }
