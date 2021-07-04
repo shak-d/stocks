@@ -1,60 +1,39 @@
 import React, { Component } from "react";
-import Button from "./Button";
-import styles from "./Tape.module.css"
-import montageStyles from "./Montage.module.css"
 import tableStyles from "./Table.module.css"
-import TextBox from "./TextBox";
-import nextId from "react-id-generator";
-import moment from "moment";
 
 type IProps = {
+    positions: Position[]
 };
 
 type IState = {
-    positions: Position[]
 }
 
-type Position = {
+export interface Position{
     price: number;
     ticker: string;
     size: number;
-    pnl: number;
+    openPnl: number;
+    closedPnl: number;
+    id: string;
 }
 
 export default class Tape extends Component<IProps, IState>{
-    static readonly maxRows = 50;
     constructor(props: IProps) {
         super(props);
-        this.state = {
-            positions: []
-        }
-        this.addPricePoint = this.addPricePoint.bind(this);
     }
 
     componentDidMount(): void {
-        this.addPricePoint({ time: new Date(), price: 456 });
-        this.addPricePoint({ time: new Date(), price: 656 });
-    }
-
-    addPricePoint(position: Position): void {
-        this.setState((state:IState)=>{
-            var newPrices: Position[];
-            newPrices = state.prices.slice().reverse();
-            newPrices.push(position);
-            if (newPrices.length > Tape.maxRows)
-                newPrices.shift();
-            newPrices.reverse();
-            return {prices: newPrices};
-        });
     }
 
     private createRow(position: Position): JSX.Element {
         return (
-            <tr key={nextId()}>
-                <td>{position.ticker}</td>
+            <tr key={position.id}>
+                <td>{position.ticker.toUpperCase()}</td>
                 <td>{position.size}</td>
-                <td>{position.price}</td>
-                <td>{position.pnl}</td>
+                <td>{position.price.toFixed(2)}</td>
+                
+                <td className={"text-right"}>{position.openPnl.toFixed(2)}</td>
+                <td className={`${"text-right"} ${position.closedPnl>0?" text-positive":" text-negative"}`}>{position.closedPnl.toFixed(2)}</td>
             </tr>
         );
     }
@@ -63,7 +42,7 @@ export default class Tape extends Component<IProps, IState>{
     render(): JSX.Element {
 
         let positionsRows: JSX.Element[] = [];
-        this.state.positions.forEach((item: Position) => {
+        this.props.positions.forEach((item: Position) => {
            
             positionsRows.push(this.createRow(item));
         }
@@ -77,7 +56,8 @@ export default class Tape extends Component<IProps, IState>{
                             <th>Ticker</th>
                             <th>Size</th>
                             <th>Price</th>
-                            <th>PnL</th>
+                            <th>Open PnL</th>
+                            <th>Closed PnL</th>
                         </tr>
                     </thead>
                     <tbody>

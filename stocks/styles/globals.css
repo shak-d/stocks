@@ -124,3 +124,15 @@ table {
 	bottom: 0;
 	transform: rotate(45deg);
   }
+
+  .text-right{
+	  text-align: right;
+  }
+
+  .text-positive{
+	  color: #00b900;
+  }
+
+  .text-negative{
+	  color: #ed1400;
+  }

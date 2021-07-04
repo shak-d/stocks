@@ -6,3 +6,9 @@
     letter-spacing: 0.6rem;
     user-select: none;
 }
+
+.logo small{
+    letter-spacing: 6px;
+    display: block;
+    font-size: 0.4em;
+}

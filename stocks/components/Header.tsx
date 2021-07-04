@@ -7,8 +7,9 @@ import Logo from './Logo';
 import Clock from 'react-live-clock';
 
 interface IProps {
-    onNewChartClicked : Function;
-    onNewTapeClicked : Function;
+    onNewChartClicked : ()=>void;
+    onNewPositionsClicked : ()=>void;
+    buyingPower:number;
 }
 
 interface IState {
@@ -19,7 +20,7 @@ export default class Header extends Component<IProps, IState>{
     constructor(props: IProps) {
         super(props);
         this.onNewChartClick = this.onNewChartClick.bind(this);
-        this.onNewTapeClick = this.onNewTapeClick.bind(this);
+        this.onNewPositionClick = this.onNewPositionClick.bind(this);
     }
 
 
@@ -30,7 +31,7 @@ export default class Header extends Component<IProps, IState>{
                     <Logo title="Project spike" />
                     <div className={stylesUtils.mlAuto}>
                         <TitledElement title="Buying power" >
-                            200,000
+                            {this.props.buyingPower.toFixed(2)}
                         </TitledElement>
                         <TitledElement title="Market clock ">
                         <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Eastern'} />
@@ -38,7 +39,7 @@ export default class Header extends Component<IProps, IState>{
                     </div>
                 </nav>
                 <Button title="+ New Chart" onClick={this.onNewChartClick} />
-                <Button title="+ New Tape" onClick={this.onNewTapeClick}/>
+                <Button title="+ New Positions" onClick={this.onNewPositionClick}/>
             </div>
         )
     }
@@ -47,8 +48,8 @@ export default class Header extends Component<IProps, IState>{
         this.props.onNewChartClicked();
     }
 
-    onNewTapeClick(event: MouseEvent) {
-        this.props.onNewTapeClicked();
+    onNewPositionClick(event: MouseEvent) {
+        this.props.onNewPositionsClicked();
     }
 }
 
